@@ -1,16 +1,17 @@
 services:
   mysql:
-    container_name: Tasks
-    image: mysql:latest
-    ports:
-      - "3306:3306"
+    image: mysql:8.0
+    container_name: peluqueria_db
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: root2609
+      MYSQL_DATABASE: peluqueria_db
+      MYSQL_USER: task
+      MYSQL_PASSWORD: root3210
+    ports:
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
 volumes:
   mysql_data:
+    driver: local
