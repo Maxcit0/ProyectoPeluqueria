@@ -1,5 +1,6 @@
 package com.acl.Peluqueria.domain;
 
+import org.springframework.stereotype.Service;  // Importación de la anotación @Service
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,10 @@ import java.util.List;
  * Servicio que gestiona las operaciones relacionadas con las tareas.
  * Aplica el principio SRP, ya que su única responsabilidad es gestionar tareas.
  */
+@Service
 public class InventarioService {
+
+    private static Long contadorId = 0L; // Contador estático para generar IDs únicos
 
     private List<Tarea> tareas = new ArrayList<>();
 
@@ -19,8 +23,18 @@ public class InventarioService {
      */
     public Tarea agregarTarea(String descripcion) {
         Tarea nuevaTarea = new Tarea(descripcion);
+        nuevaTarea.setId(generarIdUnico());
         tareas.add(nuevaTarea);
         return nuevaTarea;
+    }
+
+    /**
+     * Genera un ID único para cada tarea.
+     *
+     * @return ID único
+     */
+    private synchronized Long generarIdUnico() {
+        return ++contadorId;
     }
 
     /**
